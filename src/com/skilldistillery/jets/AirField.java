@@ -16,39 +16,52 @@ public class AirField {
 	}
 
 	public void listJets() {
-		for (int i = 0; i < jets.size(); i++) {
-			System.out.println("Jet " + (i + 1) + ":");
-			System.out.println(jets.get(i).fly());
+		System.out.println("Fleet Information:");
+		for (Jet jet : jets) {
+			System.out.println("Model: " + jet.getModel());
+			System.out.println("Speed: " + jet.getSpeed() + " MPH");
+			System.out.println("Range: " + jet.getRange() + " miles");
+			System.out.println("Price: $" + jet.getPrice());
 			System.out.println("--------------------");
 		}
 	}
 
 	public void flyAllJets() {
+		System.out.println("Flying all Jets:");
 		for (Jet jet : jets) {
-			jet.fly();
+			System.out.println(jet.fly());
 			System.out.println("--------------------");
 		}
 	}
 
-	public void viewFastestJet() {
-		Jet fastestJet = null;
-		double maxSpeed = Double.MIN_VALUE;
+    public void viewFastestJet() {
+        Jet fastestJet = findFastestJet();
 
-		for (Jet jet : jets) {
-			if (jet.getSpeed() > maxSpeed) {
-				maxSpeed = jet.getSpeed();
-				fastestJet = jet;
-			}
-		}
+        if (fastestJet != null) {
+            System.out.println("Fastest Jet Information:");
+            System.out.println("Model: " + fastestJet.getModel());
+            System.out.println("Speed: " + fastestJet.getSpeed() + " MPH");
+            System.out.println("Range: " + fastestJet.getRange() + " miles");
+            System.out.println("Price: $" + fastestJet.getPrice());
+            System.out.println("--------------------");
+        } else {
+            System.out.println("No jets in the fleet.");
+        }
+    }
 
-		if (fastestJet != null) {
-			System.out.println("Fastest Jet:");
-			System.out.println(fastestJet.fly());
-			System.out.println("--------------------");
-		} else {
-			System.out.println("No jets in the fleet.");
-		}
-	}
+    private Jet findFastestJet() {
+        Jet fastestJet = null;
+        double maxSpeed = Double.MIN_VALUE;
+
+        for (Jet jet : jets) {
+            if (jet.getSpeed() > maxSpeed) {
+                maxSpeed = jet.getSpeed();
+                fastestJet = jet;
+            }
+        }
+
+        return fastestJet;
+    }
 
 	public void viewLongestRangeJet() {
 		Jet longestRangeJet = null;
