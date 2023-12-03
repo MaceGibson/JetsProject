@@ -18,4 +18,9 @@ public class FighterJet extends Jet implements CombatReady {
 		// TODO Auto-generated method stub
 		System.out.println("Fighter Jet performing evasive actions");
 	}
+	@Override
+	public void loadAmmo() {
+		// TODO Auto-generated method stub
+		System.out.println("Filling fighter ammo..");
+	}
 }
