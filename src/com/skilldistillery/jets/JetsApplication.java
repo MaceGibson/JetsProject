@@ -4,25 +4,29 @@ import java.util.Scanner;
 
 public class JetsApplication {
 
-	public static void main(String[] args) {
-		// Create an Airfield
-		AirField airfield = new AirField();
+	private AirField airfield;
 
-		// Populate the Airfield with 5 jets
+	public JetsApplication() {
+		airfield = new AirField();
+	}
+
+	public static void main(String[] args) {
+		JetsApplication app = new JetsApplication();
+		app.run();
+	}
+
+	private void run() {
 		airfield.addJet(createFighterJet("F-22", 1500.0, 1200, 150000000));
 		airfield.addJet(createCargoPlane("Boeing C-17 Globemaster III", 450.0, 6000, 220000000));
 		airfield.addJet(createPassengerJet("Airbus A380", 560.0, 8500, 500000000));
 		airfield.addJet(createFighterJet("F-35 Lightning II", 1200.0, 1000, 95000000));
 		airfield.addJet(createCargoPlane("Lockheed Martin C-130 Hercules", 350.0, 2500, 100000000));
 
-		// Display information about all jets in the Airfield
 		airfield.listJets();
-
-		// Run the menu
-		runMenu(airfield);
+		runMenu();
 	}
 
-	private static void runMenu(AirField airfield) {
+	private void runMenu() {
 		Scanner input = new Scanner(System.in);
 
 		int choice;
@@ -30,7 +34,7 @@ public class JetsApplication {
 			displayMenu();
 			System.out.print("Enter your choice: ");
 			choice = input.nextInt();
-			input.nextLine(); // Consume the newline character
+			input.nextLine();
 
 			switch (choice) {
 			case 1:
@@ -64,12 +68,12 @@ public class JetsApplication {
 				System.out.println("Invalid choice. Please try again.");
 			}
 
-		} while (choice != 9);//make program run till user chooses quit (9).
+		} while (choice != 9);
 
 		input.close();
 	}
 
-	private static void displayMenu() {
+	private void displayMenu() {
 		System.out.println("MENU:");
 		System.out.println("1. List fleet");
 		System.out.println("2. Fly all jets");
@@ -82,22 +86,22 @@ public class JetsApplication {
 		System.out.println("9. Quit");
 	}
 
-	private static FighterJet createFighterJet(String model, double speed, int range, long price) {
+	private FighterJet createFighterJet(String model, double speed, int range, long price) {
 		FighterJet fighterJet = new FighterJet(model, speed, range, price);
-		fighterJet.loadAmmo();//Load ammo
-		fighterJet.loadCrew();// Load crew onto the fighter jet
+		fighterJet.loadAmmo();
+		fighterJet.loadCrew();
 		return fighterJet;
 	}
 
-	private static CargoPlane createCargoPlane(String model, double speed, int range, long price) {
+	private CargoPlane createCargoPlane(String model, double speed, int range, long price) {
 		CargoPlane cargoPlane = new CargoPlane(model, speed, range, price);
-		cargoPlane.loadCargo(); // Load cargo onto the cargo plane
+		cargoPlane.loadCargo();
 		return cargoPlane;
 	}
 
-	private static PassengerJet createPassengerJet(String model, double speed, int range, long price) {
+	private PassengerJet createPassengerJet(String model, double speed, int range, long price) {
 		PassengerJet passengerJet = new PassengerJet(model, speed, range, price);
-		passengerJet.loadCrew(); // Load crew onto the passenger jet
+		passengerJet.loadCrew();
 		return passengerJet;
 	}
 }
